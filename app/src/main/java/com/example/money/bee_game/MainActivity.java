@@ -33,15 +33,16 @@ public class MainActivity extends Activity {
     RelativeLayout bu_xml,top_xml,righ_xml,lef_xml,main_xml,relayout2,relayout1;
     float setfirst_xR,setfirst_xL,setfirst_y,setfirst_zH,setfirst_zL;
     DisplayMetrics v;
-    ImageView []beeimg =new ImageView[5];
+    ImageView []beeimg =new ImageView[6];
     ImageView catch_usenet;
     int randomshow =0;
-    Thread thread1,thread2;
-    RelativeLayout.LayoutParams layoutParams,bee1Params,bee2Params,bee3Params;
+    Thread thread1,thread2,thread3,thread4,thread5,thread6,thread7;
+    RelativeLayout.LayoutParams layoutParams,bee1Params,bee2Params,bee3Params,bee4Params,bee5Params,bee6Params;
     private MediaPlayer mediaPlayer;
     int pc_height,pc_width;
     DisplayMetrics displaymetrics;
     ListView listView_use;
+    int RorL =0;
     //ArrayAdapter<String> btArrayAdapter;
 
     @Override
@@ -74,7 +75,7 @@ public class MainActivity extends Activity {
                 }
             }
         });
-        thread1.start();
+
         listView_use.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,6 +85,12 @@ public class MainActivity extends Activity {
                 changepage();
             }
         });
+        thread_beeall();
+
+
+
+    }
+    private void thread_beeall(){
         thread2 =new Thread(new Runnable() {
             @Override
             public void run() {
@@ -100,8 +107,98 @@ public class MainActivity extends Activity {
                 }
             }
         });
-        thread2.start();
 
+        thread3 =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true){
+                        Message s1 =new Message();
+                        s1.what =3;
+                        mHandler.sendMessage(s1);
+                        Thread.sleep(100);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread4 =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true){
+                        Message s1 =new Message();
+                        s1.what =4;
+                        mHandler.sendMessage(s1);
+                        Thread.sleep(600);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread5 =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true){
+                        Message s1 =new Message();
+                        s1.what =5;
+                        mHandler.sendMessage(s1);
+                        Thread.sleep(100);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread6 =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true){
+                        Message s1 =new Message();
+                        s1.what =6;
+                        mHandler.sendMessage(s1);
+                        Thread.sleep(200);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread7 =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true){
+                        Message s1 =new Message();
+                        s1.what =7;
+                        mHandler.sendMessage(s1);
+                        Thread.sleep(250);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+      thread1.start();
+       /* thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
+        thread6.start();
+        thread7.start();*/
     }
     private  void changepage(){
         if(Bl_0.BLe_stus==true){
@@ -162,23 +259,33 @@ public class MainActivity extends Activity {
         beeimg[0]=(ImageView)findViewById(R.id.bee_lftig1);
         beeimg[1]=(ImageView)findViewById(R.id.bee_lftig2);
         beeimg[2]=(ImageView)findViewById(R.id.bee_lftig3);
+        beeimg[3]=(ImageView)findViewById(R.id.bee_rgtig1);
+        beeimg[4]=(ImageView)findViewById(R.id.bee_rgtig2);
+        beeimg[5]=(ImageView)findViewById(R.id.bee_rgtig3);
+
        // beeimg[0].setVisibility(View.VISIBLE);
         relayout2=(RelativeLayout)findViewById(R.id.bluelist) ;
         relayout1=(RelativeLayout)findViewById(R.id.main_xml) ;
         //-------------------------------------------------------------
         layoutParams =(RelativeLayout.LayoutParams) catch_usenet.getLayoutParams();
+        //Log.i("jim","網子右邊"+layoutParams.width);
         bee1Params =(RelativeLayout.LayoutParams) beeimg[0].getLayoutParams();
+        //Log.i("jim","網子右2邊"+bee1Params.width);
         bee2Params =(RelativeLayout.LayoutParams) beeimg[1].getLayoutParams();
+       // Log.i("jim","網子右3邊"+bee2Params.width);
         bee3Params =(RelativeLayout.LayoutParams) beeimg[2].getLayoutParams();
+        bee4Params =(RelativeLayout.LayoutParams) beeimg[3].getLayoutParams();
+        bee5Params =(RelativeLayout.LayoutParams) beeimg[4].getLayoutParams();
+        bee6Params =(RelativeLayout.LayoutParams) beeimg[5].getLayoutParams();
         displaymetrics =new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         pc_height =displaymetrics.heightPixels;
         pc_width =displaymetrics.widthPixels;
         //Log.i("'jim"," pc_height :"+pc_height);
        // Log.i("'jim"," pc_width :"+pc_width);
-        mediaPlayer =new MediaPlayer();
+       /* mediaPlayer =new MediaPlayer();
         mediaPlayer =MediaPlayer.create(this, R.raw.music1);
-        mediaPlayer.start();
+        mediaPlayer.start();*/
         //---------------------------------------------------------------
         Bl_0.mBleName =new  ArrayList<>();
         Bl_0.btArrayAdapter= new ArrayAdapter<String>(this,
@@ -192,9 +299,31 @@ public class MainActivity extends Activity {
             switch (msg.what){
                 case 1:
                    movehand();
+                   Catch_function(layoutParams,bee1Params,beeimg[0]);
                     break;
                 case  2:
-                    move_useobj();
+                    RorL=1;
+                    move_useobj(bee1Params,beeimg[0],RorL);
+                    break;
+                case 3:
+                    RorL=1;
+                    move_useobj(bee2Params,beeimg[1],RorL);
+                    break;
+                case 4:
+                    RorL=1;
+                    move_useobj(bee3Params,beeimg[2],RorL);
+                    break;
+                case 5:
+                    RorL=2;
+                    move_useobj(bee4Params,beeimg[3],RorL);
+                    break;
+                case  6:
+                    RorL=2;
+                    move_useobj(bee5Params,beeimg[4],RorL);
+                    break;
+                case  7:
+                    RorL=2;
+                    move_useobj(bee6Params,beeimg[5],RorL);
                     break;
 
             }
@@ -242,11 +371,36 @@ public class MainActivity extends Activity {
         }
 
     }
-    private  void move_useobj(){
+    private  void move_useobj(RelativeLayout.LayoutParams layoutParams1 , ImageView imageView1,int direction){
         //移動物件，6個物件
         //
+        switch (direction){
+            case  1:
+                //左
+                if(layoutParams1.leftMargin+ 50<pc_width - bee1Params.width){
+                    layoutParams1.leftMargin+=50;
+                    imageView1.setLayoutParams(layoutParams1);
+                }else{
+                    layoutParams1.leftMargin=0;
+                    imageView1.setLayoutParams(layoutParams1);
+                }
+                break;
+            case 2:
+                //右
+                if(layoutParams1.leftMargin- 50>0){
+                    layoutParams1.leftMargin-=50;
+                    imageView1.setLayoutParams(layoutParams1);
+                }else{
+                    layoutParams1.leftMargin=1900;
+                    imageView1.setLayoutParams(layoutParams1);
+                }
+                break;
+        }
 
-        if(bee1Params.leftMargin + 50<pc_width - bee1Params.width){
+
+
+
+       /* if(bee1Params.leftMargin + 50<pc_width - bee1Params.width){
             bee1Params.leftMargin+=50;
             beeimg[0].setLayoutParams(bee1Params);
         }else{
@@ -268,9 +422,30 @@ public class MainActivity extends Activity {
         }else{
             bee3Params.leftMargin=0;
             beeimg[2].setLayoutParams(bee3Params);
-        }
+        }*/
 
 
 
     }
+    private  void Catch_function(RelativeLayout.LayoutParams net_Params,RelativeLayout.LayoutParams bee_Params,ImageView obj_game){
+        /*
+        *  jim 捕抓
+        *  若捕抓物件左右在網子的左右間，及物件上下載往子的上下之間
+        *  物件寬度為105，網子為240
+        * */
+    if(obj_game.getVisibility() ==View.VISIBLE){
+        if(bee_Params.leftMargin>net_Params.leftMargin &&(bee_Params.leftMargin + 105 < net_Params.leftMargin +240)){
+            Log.i("jim","捕抓成功");
+        }
+    }else{
+
+    }
+
+
+
+    }
+
+
+
+
 }
